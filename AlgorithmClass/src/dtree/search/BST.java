@@ -20,7 +20,14 @@ public class BST<Key extends Comparable<Key>, Value>{
 		// 2. if (k < 노드 n의 id) 왼쪽 서브 트리에 삽입
 		// 3. if (k > 노드 n의 id) 오른쪽 서브 트리에 삽입
 		// 4. 그렇지 않다면 노드 n의 name 값을 value로 변경
-		
+
+		if (n.getKey().compareTo(k) > 0) {
+			n.setLeft(put(n.getLeft(), k, v));
+		} else if (n.getKey().compareTo(k) < 0) {
+			n.setRight(put(n.getRight(), k, v));
+		} else {
+			n.setValue(v);
+		}
 	
 		return n;
 	}
@@ -37,7 +44,13 @@ public class BST<Key extends Comparable<Key>, Value>{
 		// 3. if (k > 노드 n의 id) 오른쪽서브 트리 탐색
 		// 4. 그렇지 않다면 k를 가진 노드를 리턴 ( k를 가진 노드 발견 )
 		
-		return null;
+		if(n.getKey().compareTo(k)>0){
+			 return get(n.getLeft(),k);
+		}else if(n.getKey().compareTo(k)<0){
+			return get(n.getRight(),k);
+		}else{
+			return (Value) n.getValue();
+		}
 	}
 	
 
@@ -49,6 +62,15 @@ public class BST<Key extends Comparable<Key>, Value>{
 		if (n.getLeft() == null)  return n;
 		return min(n.getLeft());
 	}	
+	
+	public Key max() { 
+		if (root == null) return null;
+		return (Key) max(root).getKey();}
+	private Node max(Node n) {
+		if (n.getRight() == null)  return n;
+		return max(n.getRight());
+	}
+	
 	public void deleteMin() {
 		if (root == null) System.out.println("empty 트리");
 		root = deleteMin(root);	}
@@ -57,6 +79,8 @@ public class BST<Key extends Comparable<Key>, Value>{
 		n.setLeft(deleteMin(n.getLeft())); 					// if (n의 왼쪽 자식≠null), n의 왼쪽 자식으로 재귀 호출
 		return n;
 	}
+	
+	
 		
 	public void deleteMax() {
         if (root == null)  System.out.println("empty 트리");
@@ -79,6 +103,24 @@ public class BST<Key extends Comparable<Key>, Value>{
 		//		- case 0 : 자식이 없는 경우
 		//		- case 1 : 자식이 하나 인 경우
 		//		- case 2 : 자식이 둘 다 있는 경우	
+		
+		if(n.getKey().compareTo(k)>0){
+			n.setLeft(delete(n.getLeft(),k));
+		}else if(n.getKey().compareTo(k)<0 ){
+			n.setRight(delete(n.getRight(),k));
+		}else{
+			if(n.getRight() ==null && n.getLeft() ==null){
+				n = null;
+			}else if(n.getRight() !=null &&n.getLeft() ==null){
+				return n.getRight();
+			}else if(n.getRight() ==null && n.getLeft() !=null){
+				return n.getLeft();
+			}
+			Node target = n;
+			n=max(target.getLeft());
+			n.setLeft(deleteMax(target.getLeft()));
+			n.setRight(target.getRight());
+		}
 		
 		
 		

@@ -1,6 +1,10 @@
 package dtree.binary;
 
 public class Node<Key extends Comparable<Key>> {
+	//CompareTo() overrideing 하여 두 모드 값 비교 필요
+	//key는 자료형은 comparavle를 구현한 클래스만 올수있다
+	//ex)String/ Integer / double
+	
 	private  Key       item;
 	private  Node<Key> left;
 	private  Node<Key> right;
