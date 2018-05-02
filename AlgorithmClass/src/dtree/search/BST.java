@@ -104,20 +104,20 @@ public class BST<Key extends Comparable<Key>, Value>{
 		//		- case 1 : 자식이 하나 인 경우
 		//		- case 2 : 자식이 둘 다 있는 경우	
 		
-		if(n.getKey().compareTo(k)>0){
-			n.setLeft(delete(n.getLeft(),k));
-		}else if(n.getKey().compareTo(k)<0 ){
-			n.setRight(delete(n.getRight(),k));
-		}else{
-			if(n.getRight() ==null && n.getLeft() ==null){
+		if (n.getKey().compareTo(k) > 0) {
+			n.setLeft(delete(n.getLeft(), k));
+		} else if (n.getKey().compareTo(k) < 0) {
+			n.setRight(delete(n.getRight(), k));
+		} else {
+			if (n.getRight() == null && n.getLeft() == null) {
 				n = null;
-			}else if(n.getRight() !=null &&n.getLeft() ==null){
+			} else if (n.getRight() != null && n.getLeft() == null) {
 				return n.getRight();
-			}else if(n.getRight() ==null && n.getLeft() !=null){
+			} else if (n.getRight() == null && n.getLeft() != null) {
 				return n.getLeft();
 			}
 			Node target = n;
-			n=max(target.getLeft());
+			n = max(target.getLeft());
 			n.setLeft(deleteMax(target.getLeft()));
 			n.setRight(target.getRight());
 		}
