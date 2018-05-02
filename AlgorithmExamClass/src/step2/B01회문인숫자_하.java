@@ -33,26 +33,47 @@ public class B01회문인숫자_하 {
 
 		for (int i = 2; i <= 64; i++) // 2진수에서 64진수까지 확인
 		{
+			temp = new int[100];
 			/**
 			 * 해당 진수(2~64진수)의 수로 저장 회문인지 확인
 			 */
 			int su = value;
-			int k=0;
-			while(flag){//
-				System.out.println("?");
-				su= su/i;
-				temp[k] = su%i;
-				k++;
-				System.out.println(">>"+i);
-				if(su /i == 0){
+			int k = 0;// 순서
+			flag = true;
+			while (flag) {
+				if (su == 0) {
 					flag = false;
 					break;
 				}
+				temp[k] = su % i;
+				su = su / i;
+				k++;
+				//System.out.println(i+">>");
+			}
+
+			for (int j = 0; j < k; j++) {
+				//System.out.println(k+">>>");
+				if (temp[j] == temp[k - j-1]) {
+					notmatch = true;
+					//System.out.println(notmatch+">>");
+
+				} else {
+					notmatch = false;
+					//System.out.println(notmatch+">");
+					break;
+				}
+
 			}
 			
-			System.out.println(Arrays.toString(temp));
-			
+			if(notmatch){
+				return notmatch;
+			}
+
+			//System.out.println(Arrays.toString(temp));
+
 		}
+		
+		
 
 		return notmatch;
 	}

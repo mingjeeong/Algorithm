@@ -24,10 +24,7 @@ public class A01마방진_하 {
 			 */
 	
 			
-			
-			
 		}
-		
 		
 		// 출력
 		for(int i=1; i<=N; i++)
